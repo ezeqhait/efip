@@ -1,0 +1,12 @@
+{
+    "name": "efip/dinotaks",
+    "description": "PHP 8, SASS",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models"
+        }
+    }
+}
