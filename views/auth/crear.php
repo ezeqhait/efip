@@ -7,13 +7,13 @@
 
         <form class="formulario" method="POST" action="/crear">
             <div class="campo">
-                <label for="nombre">Nombre</label>
+                <label for="nombreCompleto">Nombre Completo</label>
                 <input 
                     type="text"
-                    id="nombre"
-                    placeholder="Tu Nombre"
-                    name="nombre"
-                    value="<?php echo $usuario->nombre; ?>"
+                    id="nombreCompleto"
+                    placeholder="Tu Nombre Completo"
+                    name="nombreCompleto"
+                    value="<?php echo $ingresante->nombreCompleto; ?>"
                 />
             </div>
 
@@ -24,7 +24,7 @@
                     id="email"
                     placeholder="Tu Email"
                     name="email"
-                    value="<?php echo $usuario->email; ?>"
+                    value="<?php echo $ingresante->email; ?>"
                 />
             </div>
 

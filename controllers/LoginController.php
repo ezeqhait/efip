@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Classes\Email;
-use Model\Usuario;
+use Model\ingresante;
 use MVC\Router;
 
 class LoginController{
@@ -25,14 +25,19 @@ class LoginController{
     }
 
     public static function crear(Router $router) {
+        $alertas = [];
+        $ingresante = new ingresante;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+            $ingresante->sincronizar($_POST);
+            $alertas = $ingresante->validarNuevaCuenta();
         }
 
         // Render a la vista
         $router->render('auth/crear', [
-            'titulo' => 'Crea tu cuenta'
+            'titulo' => 'Crea tu cuenta',
+            'ingresante' => $ingresante,
+            'alertas' => $alertas
         ]);
         
     }
