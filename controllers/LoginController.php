@@ -26,11 +26,40 @@ class LoginController{
 
     public static function crear(Router $router) {
         $alertas = [];
-        $ingresante = new ingresante;
+        $ingresante = new Ingresante;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $ingresante->sincronizar($_POST);
             $alertas = $ingresante->validarNuevaCuenta();
+            
+            if(empty($alertas)) {
+                $existeMail = ingresante::where('email', $ingresante->email);
+                $existeDni = ingresante::where('dni', $ingresante->dni);
+                
+                if($existeMail) {
+                    ingresante::setAlerta('error', 'El correo ya se encuentra registrado');
+                    $alertas = ingresante::getAlertas();
+                }
+
+                if($existeDni) {
+                    ingresante::setAlerta('error', 'El DNI ya se encuentra registrado');
+                    $alertas = ingresante::getAlertas(); 
+                } 
+                
+                else {
+
+                    //hashear password
+                    $ingresante->hashPassword();
+                    
+                    //eliminar password2
+                    unset($ingresante->password_actual);
+                    unset($ingresante->password_nuevo);
+                    unset($ingresante->password2);
+
+                    // crear nuevo usuario
+                    debuguear($ingresante);                    
+                }
+            }
         }
 
         // Render a la vista
@@ -77,7 +106,7 @@ class LoginController{
 
     public static function confirmar(Router $router) {
         $router->render('auth/confirmar', [
-            'titulo' => 'Confirma tu cuenta UpTask',
+            'titulo' => 'Confirma tu cuenta DinoTask',
             'alertas' => $alertas
         ]);
     }

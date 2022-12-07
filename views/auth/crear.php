@@ -5,15 +5,41 @@
 
         <?php include_once __DIR__ .'/../templates/alertas.php'; ?>
 
+       
         <form class="formulario" method="POST" action="/crear">
             <div class="campo">
-                <label for="nombreCompleto">Nombre Completo</label>
+                <label for="dni">DNI</label>
+                <input 
+                    type="int"
+                    id="dni"
+                    placeholder="Tu DNI"
+                    name="dni"
+                    value="<?php echo $ingresante->dni; ?>"
+                />
+            </div>             
+        
+        
+        <form class="formulario" method="POST" action="/crear">
+            <div class="campo">
+                <label for="nombre">Nombre</label>
                 <input 
                     type="text"
-                    id="nombreCompleto"
-                    placeholder="Tu Nombre Completo"
-                    name="nombreCompleto"
-                    value="<?php echo $ingresante->nombreCompleto; ?>"
+                    id="nombre"
+                    placeholder="Tu Nombre"
+                    name="nombre"
+                    value="<?php echo $ingresante->nombre; ?>"
+                />
+            </div>
+
+            <form class="formulario" method="POST" action="/crear">
+            <div class="campo">
+                <label for="apellido">Apellido</label>
+                <input 
+                    type="text"
+                    id="apellido"
+                    placeholder="Tu Apellido"
+                    name="apellido"
+                    value="<?php echo $ingresante->apellido; ?>"
                 />
             </div>
 
