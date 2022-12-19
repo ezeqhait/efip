@@ -3,7 +3,7 @@
 
 .crear {
     margin-top: 5rem;
-    .uptask {
+    .dinotask {
         @include m.textoDegradado(v.$morado);
     }
     input[type="submit"] {

@@ -8,7 +8,7 @@ class ingresante extends ActiveRecord {
 
     public function __construct($args = [])
     {
-        $this->DNI = $args ['id'] ?? '';
+        $this->id = $args ['id'] ?? null;
         $this->dni = $args ['dni'] ?? '';
         $this->nombre = $args ['nombre'] ?? '';
         $this->apellido = $args ['apellido'] ?? '';        
@@ -18,8 +18,23 @@ class ingresante extends ActiveRecord {
         $this->password_actual = $args ['password_actual'] ?? '';
         $this->password_nuevo = $args ['password_nuevo'] ?? '';        
         $this->token = $args ['token'] ?? '';
-        $this->confirmacion = $args ['confirmacion'] ?? 0;        
+        $this->confirmacion = $args ['confirmacion'] ?? 0;       
     }
+
+        // Validar el Login de ingresantes
+        public function validarLogin() {
+            if(!$this->email) {
+                self::$alertas['error'][] = 'El Email del Usuario es Obligatorio';
+            }
+            if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+                self::$alertas['error'][] = 'Email no válido';
+            }
+            if(!$this->password) {
+                self::$alertas['error'][] = 'El Password no puede ir vacía';
+            }
+            return self::$alertas;
+    
+        }
 
     // Validación para cuentas nuevas
     public function validarNuevaCuenta() {
@@ -105,7 +120,7 @@ class ingresante extends ActiveRecord {
     }
 
     // Hashea el password
-    public function hashPassword() {
+    public function hashPassword() : void {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 

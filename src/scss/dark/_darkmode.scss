@@ -2,7 +2,7 @@
 @use 'base/variables' as v;
 
 @media (prefers-color-scheme: dark) {
-    $grisOscuro: #2c2c3b;
+    $grisOscuro: #233928;
     body {
         background-color: $grisOscuro;
     }
